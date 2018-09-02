@@ -1,0 +1,70 @@
+# SERVER
+server:
+  port: 8080 # Server HTTP port
+
+# SPRING
+spring:
+  application:
+    name: akuna-core # Application name
+#  data:
+#    mongodb:
+#      uri: ${MONGO_URI:mongodb://localhost:27017/user-task-manager}
+#  sleuth:
+#    enabled: ${ZIPKIN_ENABLED:false}
+#    sampler:
+#      percentage: 1
+#  zipkin:
+#      baseUrl: ${ZIPKIN_URL}
+#      service.name: ${spring.application.name}
+
+services:
+  akuna-core:
+    url: ${AKUNA_CORE_URL:}
+#  notification-engine:
+#    url: ${NOTIFICATION_ENGINE_URL:}
+#  api-gateway:
+#    url: ${API_GATEWAY_URL:}
+#  mistral:
+#    url: ${MISTRAL_URL:http://mistral-eso-services.sdnoshm05.netcracker.com}
+#    enabled: true
+#    resource:
+#      tasks: ${mistral.url}/v2/tasks
+#      workflows: ${mistral.url}/v2/workflows
+#      executions: ${mistral.url}/v2/executions
+
+logging:
+  level:
+    org.springframework.web: ERROR
+    com.akuna.core: DEBUG
+
+---
+# Secure configuration, when SPRING_PROFILES_ACTIVE = !dev
+spring:
+    profiles: "prod"
+security:
+  oauth2:
+    client:
+      access-token-uri: ${IDP_URL:""}/token
+      client-id: ${IDP_CLIENT_ID:""}
+      client-secret: ${IDP_CLIENT_SECRET:""}
+      grant-type: client_credentials
+    resource:
+      tokenInfoUri: any
+      identity-provider: mitre
+      identity-provider-url: ${IDP_URL:""}
+  ignored:
+    /webjars/**,
+    /swagger-ui.html,
+    /swagger-resources/**,
+    /v2/api-docs,
+    /images/**,
+    /error,
+    /health,
+    /heapdump
+
+---
+# Insecure configuration, when SPRING_PROFILES_ACTIVE = dev
+spring:
+    profiles: "dev"
+security:
+  ignored: /**

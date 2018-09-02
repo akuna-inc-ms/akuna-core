@@ -1,0 +1,11 @@
+build:
+ env:
+  type: microservice
+  version: mvn_3.3.9_sd-jdk_8u91
+ networkRules: sandbox
+
+publication:
+ docker:
+  - timestamp
+  - latest
+ mvn:
