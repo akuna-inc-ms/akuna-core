@@ -6,9 +6,9 @@ server:
 spring:
   application:
     name: akuna-core # Application name
-#  data:
-#    mongodb:
-#      uri: ${MONGO_URI:mongodb://localhost:27017/user-task-manager}
+  data:
+    jpa:
+      uri: ${POSTGRES_URI:postgresql://localhost:27018/akuna}
 #  sleuth:
 #    enabled: ${ZIPKIN_ENABLED:false}
 #    sampler:
@@ -20,17 +20,8 @@ spring:
 services:
   akuna-core:
     url: ${AKUNA_CORE_URL:}
-#  notification-engine:
-#    url: ${NOTIFICATION_ENGINE_URL:}
-#  api-gateway:
-#    url: ${API_GATEWAY_URL:}
-#  mistral:
-#    url: ${MISTRAL_URL:http://mistral-eso-services.sdnoshm05.netcracker.com}
-#    enabled: true
-#    resource:
-#      tasks: ${mistral.url}/v2/tasks
-#      workflows: ${mistral.url}/v2/workflows
-#      executions: ${mistral.url}/v2/executions
+  api-gateway:
+    url: ${API_GATEWAY_URL:}
 
 logging:
   level:

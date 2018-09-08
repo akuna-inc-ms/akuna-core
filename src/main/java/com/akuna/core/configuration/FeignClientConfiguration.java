@@ -7,7 +7,7 @@ import feign.Retryer;
 import feign.codec.Decoder;
 import feign.codec.Encoder;
 import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.boot.autoconfigure.web.HttpMessageConverters;
+import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.cloud.netflix.feign.support.ResponseEntityDecoder;
 import org.springframework.cloud.netflix.feign.support.SpringDecoder;
 import org.springframework.cloud.netflix.feign.support.SpringEncoder;
